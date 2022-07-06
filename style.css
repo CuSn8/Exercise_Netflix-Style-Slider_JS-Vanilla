@@ -2,9 +2,6 @@
     box-sizing: border-box;
 }
 
-:root {
-}
-
 body {
     margin: 0;
 }
@@ -14,12 +11,16 @@ body {
      width: 100%;
      display: flex;
      justify-content: center;
+     overflow: hidden;
 }
 
 .slider {
+    --slider-index: 0;
     flex-grow: 1;
+    margin: 0 .25rem;
     display: flex;
-    transform: translateX(-00%);
+    transform: translateX(calc(var(--slider-index) * -100%));
+    transition: transform 250ms ease-in-out;
 }
 
 .slider > img {
@@ -32,18 +33,19 @@ body {
 
 .handle {
     flex-grow: 0;
-     width: 5rem;
      background-color: rgba(0, 0, 0, .25);
      z-index: 10;
      margin: .25rem 0;
+     padding: 0.5rem;
      cursor: pointer;
      border: none;
      border-radius: 1rem;
-}
-
-.handle:hover {
-    background-color: rgba(0, 0, 0, .5);
-
+     font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: background-color 150ms ease-in-out;
 }
 
 .left-handle {
@@ -56,14 +58,6 @@ body {
     border-bottom-right-radius: 0;
 }
 
-.handle {
-    font-size: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-}
-
 .container:hover .left-handle::after {
     content: \2039;
 }
@@ -72,6 +66,17 @@ body {
     content: \203A;
 }
 
-.handle:hover {
-   font-size: 4rem;
+.text {
+    transition: transform 150ms ease-in-out;
+}
+
+.handle:hover, 
+.handle:focus {
+    background-color: rgba(0, 0, 0, .5);
+
+}
+
+.handle:hover .text,
+.handle:focus .text {
+   transform: scale(1.3);
 }
